@@ -54,8 +54,20 @@ a {
 }
 
 ul {
-  list-style: none;
   padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+/* 버튼의 기본 속성 제거 */
+button {
+  /* 부모의 색상을 따라감(투명한 느낌) */
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 /* Typography */
@@ -131,4 +143,38 @@ p {
 
 #navbar .navbar__menu .navbar__menu__item:hover {
   background-color: var(--color-dark-pink);
+}
+
+/* Home */
+#home {
+  /* 기존에는 기본 이미지 사이즈에 반복하면서 나타나는데 이를 막기 위해
+    이미지를 center 정렬하고 cover하여 해당 block 사이즈에 맞춰서 
+    이미지 크기가 늘어나게 하면 no-repeat 한다. */
+  background: url("images/home-background.png") center/cover no-repeat;
+  padding: 40px;
+  /* 모든 아이템들을 중앙 정렬하기 위한 방법 중 하나 */
+  text-align: center;
+}
+
+#home .home__avatar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 2px solid var(--color-dark-grey);
+}
+
+#home .home__title,
+.home__description {
+  color: var(--color-black);
+}
+
+#home .home__contact {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-bold);
+  margin: 24px;
+  padding: 8px 12px;
+
+  border: 2px solid var(--color-black);
+  border-radius: var(--size-border-radius);
+  color: var(--color-black);
 }
