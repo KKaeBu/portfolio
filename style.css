@@ -27,12 +27,35 @@
   --weight-regular: 400;
 
   /* Size */
+  --size-border-radius: 4px;
 }
 
 /* Universal tags */
 /* 공통적으로 적용되어야 할 것들 */
 * {
   box-sizing: border-box;
+}
+
+/* 기본적으로 있는 margin 제거 */
+body {
+  margin: 0;
+
+  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
+
+  /* 텍스트에 커서 올렸을시 모양 변화를 막기 위해 */
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 /* Typography */
@@ -65,6 +88,47 @@ p {
   margin: 4px 0;
 }
 
-/* font-family: 'Open Sans', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Source Sans Pro', sans-serif; */
+/* Navbar */
+#navbar {
+  display: flex;
+  background-color: var(--color-pink);
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-white);
+  padding: 16px;
+}
+
+#navbar .navbar__logo {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+}
+
+#navbar .navbar__logo img {
+  width: 80px;
+  background-size: cover;
+}
+
+#navbar .navbar__menu {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+}
+
+#navbar .navbar__menu .navbar__menu__item {
+  /* border: 1px solid black; */
+  padding: 8px 12px;
+  margin: 0 4px;
+  /* 아이템에 마우스 올렸을시 클릭 모양으로 바뀌게 함 */
+  cursor: pointer;
+  border-radius: var(--size-border-radius);
+}
+
+#navbar .navbar__menu .navbar__menu__item.active {
+  border: 1px solid var(--color-white);
+}
+
+#navbar .navbar__menu .navbar__menu__item:hover {
+  background-color: var(--color-dark-pink);
+}
