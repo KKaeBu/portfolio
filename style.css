@@ -333,3 +333,116 @@ p {
 .etc {
   padding: 20px;
 }
+
+/* Work */
+.work__categories {
+  margin: 40px;
+}
+
+.category__btn {
+  border: 1px solid var(--color-dark-white);
+  border-radius: var(--size-border-radius);
+  font-size: var(--font-regular);
+  padding: 8px 48px;
+}
+
+/* 버튼이 active 상태이거나 hover 됬을때 배경색 변경 */
+.category__btn.active,
+.category__btn:hover {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+
+.category__btn.active .category__count, /* 카테고리 버튼이 active 상태인! 카테고리 카운트와 */
+.category__btn:hover .category__count {
+  /* 카테고리 버트에 마우스가 올라왔을 떄! 안에있는 카테고리 카운트만 */
+  opacity: 1;
+  top: 0;
+  /* 숫자가 위에서 아래로 내려왔다가 다시 올라가는 듯한 효과를 줄 수 있음 */
+}
+
+.category__count {
+  background-color: var(--color-orange);
+  border-radius: 50%;
+  color: var(--color-white);
+  width: 24px;
+  height: 24px;
+  /* span 테그는 컨텐츠를 꽉 감싸고 있기에
+  동그라미를 만들기위해 inline-block으로 바꿈 */
+  display: inline-block;
+  line-height: 24px;
+
+  position: relative;
+  top: -20px;
+  left: 4px;
+  /* 평소에는 안보이게 하기위해 opacity값을 0으로함 */
+  opacity: 0;
+  transition: all var(--animation-duration) ease-in;
+}
+
+.work__projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 280px;
+  height: 250px;
+  margin: 2px;
+  background-color: var(--color-light-white);
+}
+
+.projcet__img {
+  /* 이미지들이 본인이 담겨있는 box의 사이즈에 딱 맞게 넣기 위해서 */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* 원래있던 박스를 벗어나서 위치를 정의한느 것 -> position: absolute */
+.project__description {
+  /* absolute는 자신의 부모들 중에서 static이 아닌 놈을 찾아서 그놈을
+  기준으로 붙기 때문에 부모중에 별도로 position값을 다른 값(static 제외 static은 default 값임)
+  이 없다면 계속 위로 올라가게됨 */
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+
+  transform: translateY(10px);
+  transition: all var(--animation-duration) ease-in;
+}
+
+.project:hover .project__description {
+  opacity: 0.8;
+  transform: translateY(0px);
+}
+
+.project__description h3 {
+  color: var(--color-white);
+}
+
+.project__description h3:after {
+  content: "";
+  display: block;
+  position: relative;
+  left: 50%;
+  width: 25px;
+  height: 2px;
+  margin-left: -12px;
+  margin-top: 8px;
+  background-color: var(--color-dark-white);
+}
