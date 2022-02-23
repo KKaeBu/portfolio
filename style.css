@@ -6,8 +6,8 @@
   --color-dark-white: #bdbdbd;
   --color-pink: #fe918d;
   --color-dark-pink: #ff6863;
-  --color-black: #4d4d4d;
-  --color-dark-grey: #4d4d4d;
+  --color-grey: #4d4d4d;
+  --color-dark-grey: #424242;
   --color-light-grey: #7c7979;
   --color-blue: #73aace;
   --color-yellow: #fff7d1;
@@ -188,6 +188,10 @@ p {
 .section {
   padding: 50px;
   text-align: center;
+  margin: auto;
+}
+
+.section__container {
   /* 최대로 커질 수 있는 크기 고정 */
   max-width: 1200px;
   margin: auto;
@@ -261,4 +265,71 @@ p {
 .job img {
   width: 62px;
   height: 62px;
+}
+
+/* Skill */
+#skills {
+  background-color: var(--color-yellow);
+}
+
+.skillset {
+  display: flex;
+  background-color: var(--color-light-grey);
+  color: var(--color-light-white);
+  margin: 20px 0;
+}
+
+.skillset__title {
+  color: var(--color-white);
+}
+
+/* 아이템들이 크기가 자동적으로 늘어나게 만들기 위해서
+아이템 별로 flex-basis를 지정해 줘야한다.*/
+.skillset__left {
+  flex-basis: 60%;
+  background-color: var(--color-dark-grey);
+  padding: 20px 40px;
+}
+
+.skill {
+  margin-bottom: 32px;
+}
+
+.skill_description {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 프로그레스바 직접 만들기 */
+
+/* 프로그레스바 총 % 바 */
+.skill__bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-grey);
+}
+
+/* 프로그레스바 진행도 % 바 */
+.skill__value {
+  /* width: 70%; */
+  /* width를 css에서 정의하면 모든 프로그레스바 진행도가 똑같기에
+  width는 html 테그에서 정의해줘야 한다.
+  또 이런데이터들은 나중에 따로 추출해서 json에서 동적으로 관리하고 html코드로
+  변환해서 자동적으로 생성할거기에 전부다 html에 적용되어야한다. */
+  /* 그러기 위해서 html태그에 style을 inline화 한다.(태그 안에서 style 속성값 사용) */
+  height: 3px;
+  background-color: var(--color-orange);
+}
+
+.skillset__right {
+  flex-basis: 40%;
+}
+
+.tools {
+  background-color: var(--color-grey);
+}
+
+.tools,
+.etc {
+  padding: 20px;
 }
