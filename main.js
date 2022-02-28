@@ -2,7 +2,7 @@
 // 미연에 방지 (자세한 내용은 구글 검색)
 'use strict';
 
-// Make navbar transparent when it is on the top
+// 1. Make navbar transparent when it is on the top
 const navbar = document.querySelector('#navbar');
 const navbarHeight = navbar.getBoundingClientRect().height;
 
@@ -19,4 +19,21 @@ document.addEventListener('scroll', () => {
         // 그렇지 않다면 어두워지게하는 클래스 추가한걸 없애줌
         navbar.classList.remove('navbar--dark');
     }
+});
+
+// 2. Scrolling when navbar items clicked
+const navbarMenu = document.querySelector('.navbar__menu');
+// navbar item 클릭시 이벤트 리스너 작성(보통은 클릭시 인자로 event가 들어옴)
+navbarMenu.addEventListener('click', (event) => {
+    const target = event.target;
+    const link = target.dataset.link;
+    // 우리가 원하는 데이터가 아닌 아이템 클릭시 undefined가 나오는데
+    // 이를 처리하기 위해 아래의 구문 사용
+    if(link == null){
+        return;
+    }
+    console.log(event.target.dataset.link);
+
+    const scrollTo = document.querySelector(link);
+    scrollTo.scrollIntoView({ behavior: 'smooth' });
 });
