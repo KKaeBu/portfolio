@@ -105,12 +105,22 @@ p {
 
 /* Navbar */
 #navbar {
+  /* home 위에 올라와 있어야 하기에 */
+  position: fixed;
+  width: 100%;
+
   display: flex;
-  background-color: var(--color-pink);
+  background-color: transparent;
   justify-content: space-between;
   align-items: center;
-  color: var(--color-white);
+  color: var(--color-black);
   padding: 16px;
+}
+
+#navbar.navbar--dark {
+  background-color: var(--color-pink);
+  padding: 8px;
+  transition: all var(--animation-duration) ease-in-out;
 }
 
 #navbar .navbar__logo {
@@ -118,6 +128,10 @@ p {
   align-items: center;
   font-size: var(--font-medium);
   font-weight: var(--weight-semi-bold);
+}
+
+#navbar .navbar__logo a {
+  color: var(--color-black);
 }
 
 #navbar .navbar__logo img {
@@ -141,7 +155,7 @@ p {
 }
 
 #navbar .navbar__menu .navbar__menu__item.active {
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--color-black);
 }
 
 #navbar .navbar__menu .navbar__menu__item:hover {
@@ -167,6 +181,9 @@ p {
     이미지 크기가 늘어나게 하면 no-repeat 한다. */
   background: url("images/home-background.png") center/cover no-repeat;
   padding: 40px;
+
+  /* navbar에 home avatar가 겹치기에 top에 패딩 추가 */
+  padding-top: 120px;
   /* 모든 아이템들을 중앙 정렬하기 위한 방법 중 하나 */
   text-align: center;
 }
