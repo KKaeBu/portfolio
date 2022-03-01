@@ -119,7 +119,7 @@ p {
 
 #navbar.navbar--dark {
   background-color: var(--color-pink);
-  padding: 8px;
+  padding: 0 8px;
   transition: all var(--animation-duration) ease-in-out;
   z-index: 1;
 }
