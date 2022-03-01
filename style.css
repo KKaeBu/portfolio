@@ -115,12 +115,12 @@ p {
   align-items: center;
   color: var(--color-black);
   padding: 16px;
+  transition: all var(--animation-duration) ease-in-out;
 }
 
 #navbar.navbar--dark {
   background-color: var(--color-pink);
   padding: 0 8px;
-  transition: all var(--animation-duration) ease-in-out;
   z-index: 1;
 }
 
@@ -552,6 +552,30 @@ p {
 .contact_links i:hover {
   transform: scale(1.1);
   color: var(--color-yellow);
+}
+
+/* Arrow up Button */
+.arrowUpBtn {
+  font-size: 60px;
+  position: fixed;
+  right: 40px;
+  bottom: 30px;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  opacity: 0;
+  transition: all var(--animation-duration) ease-in-out;
+
+  /* 불투명이긴 하지만 실제로는 있기때문에 클릭이 됨
+  그렇기에 보이지 않을 떄에는 클리깅 안되게 해야함 */
+  pointer-events: none;
+}
+
+.arrowUpBtn.arrowUpBtn--display {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Media query */

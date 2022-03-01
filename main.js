@@ -70,6 +70,30 @@ document.addEventListener('scroll', () => {
     // 해당 컨테이너가 투명해지도록 한다.
 });
 
+// 5. Arrow up button
+const arrowUpBtn = document.querySelector('.arrowUpBtn');
+
+// 윈도우의 scroll 위치를 지정해주는 함수 window.scroll()
+// option값인 top을 사용해 가장 위로 이동
+arrowUpBtn.addEventListener('click', () => {
+    // window.scroll({
+    //     top,
+    //     behavior: 'smooth'
+    // });
+
+    // 다른 방법으로는 우리가 만들어 놓은 함수를 사용해 home으로 이동
+    scrollIntoView('#home');
+});
+
+document.addEventListener('scroll', () => {
+    if(window.scrollY > homeHeight / 2) {
+        arrowUpBtn.classList.add('arrowUpBtn--display');
+    }else{
+        arrowUpBtn.classList.remove('arrowUpBtn--display');
+    }
+
+});
+
 
 // functions
 function scrollIntoView(selector) {
