@@ -48,6 +48,30 @@ homeContactMeBtn.addEventListener('click', (event) => {
     scrollIntoView('#contact');
 });
 
+// 4. Home opacity
+// 스크롤을 내릴수록 홈 화면의 아이템들이 점점 투명해지도록함
+const home = document.querySelector('.home__container');
+
+// 높이를 가져오기 위한 함수사용
+const homeHeight = home.getBoundingClientRect().height;
+
+document.addEventListener('scroll', () => {
+    // console.log(window.scrollY)
+    // console.log(`homeHeight: ${homeHeight}`);
+
+    // 스크롤이 가장 위에 있을때는 window.scrollY 값이 0 이고 내려갈수록 점점 커짐
+    // opacity는 1일때 가장 불투명하고 0이하일떄 가장 투명하다.
+    // console.log(1 - window.scrollY / homeHeight);
+
+    // css에 opacity 적용하기
+    home.style.opacity = 1 - window.scrollY / homeHeight;
+    // 이 때 home 전체가 투명해지는것이 아니라 home 안에 컨텐츠들만 투명해지게 하기 위해
+    // html코드의 home 안에 있는 코드들을 home__container라는 div로 한번 묶어줘서
+    // 해당 컨테이너가 투명해지도록 한다.
+});
+
+
+// functions
 function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({ behavior: 'smooth' });
