@@ -94,6 +94,9 @@ document.addEventListener('scroll', () => {
 
 });
 
+// 6. project selection
+
+
 
 // functions
 function scrollIntoView(selector) {
