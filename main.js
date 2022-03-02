@@ -26,7 +26,10 @@ const navbarMenu = document.querySelector('.navbar__menu');
 // navbar item 클릭시 이벤트 리스너 작성(보통은 클릭시 인자로 event가 들어옴)
 navbarMenu.addEventListener('click', (event) => {
     const target = event.target;
+    // dataset객체를 통해 data속성을 가져오기 위해서는 속성 이름의 data-뒷 부분을 사용한다
+    // 각 속성은 문자열이며 읽거나 쓸 수 있다.
     const link = target.dataset.link;
+
     // 우리가 원하는 데이터가 아닌 아이템 클릭시 undefined가 나오는데
     // 이를 처리하기 위해 아래의 구문 사용
     if(link == null){
@@ -96,8 +99,105 @@ document.addEventListener('scroll', () => {
 
 // 6. project selection
 
+// 우선 프로젝트 카테고리 버튼들이 눌렸을때 눌린 버튼만 active 되고
+/**
+ * 내가 해본 버젼
+
+// 나머지 버튼들은 unactive한 상태로 만들기
+const categories = document.querySelector('.work__categories');
+const projects = document.querySelector('.work__projects');
+
+categories.addEventListener('click', (event) => {
+    // Event 인터페이스의 target 속성은 이벤트가 발생한 대상 객체를 가리킵니다.
+    // console.log(event.target)
+    const target = event.target;
+    const link = target.dataset.link;
+
+    // 버튼이 아닌 다른 빈 여백을 눌렀을 경우엔 아무것도 하지 않음
+    if(link == null) {
+        return;
+    }
+    
+    console.log(`link: ${link}`)
+
+    // 각 카테코리별 버튼 클릭시 선택되지 않는 프로젝트들을 선별
+    const Allproject = projects.querySelectorAll('.project');
+    const project = projects.querySelectorAll(link);
+
+    Allproject.forEach(element => {
+        element.classList.remove('selected');
+    });
+
+    Allproject.forEach(element => {
+        element.classList.add('unselected');
+    });
+
+    project.forEach(element => {
+        element.classList.remove('unselected');
+        element.classList.add('selected');
+    });
+
+});
+*/
+
+const workBtnContainer = document.querySelector('.work__categories');
+const projectContainer = document.querySelector('.work__projects');
+// project클래스를 가지고있는 쿼리 리스트가 전달됨
+const projects = document.querySelectorAll('.project');
+
+workBtnContainer.addEventListener('click', (e) => {
+    // const filter = e.target.dataset.filter;
+    // console.log(filter);
+    // 단, 이 때 버튼 옆의 숫자는 span 태그로 감싸져 있어서 눌러도 undefined이 뜰텐데
+    // 이를 방지하기 위해 개발자 툴에서 source를 통해 디버깅을 하고
+    // 해당 span 태그(e.target 활용)의 부모 노드의 filter 값을 가져오면 된다.
+    const filter = e.target.dataset.filter || e.target.parentNode.dataset.filter;
+
+    if(filter == null) {
+        return;
+    }
+
+    // 버튼 클릭시 project container 자체가 사라지는 효과를 넣기 위해
+    projectContainer.classList.add('anim-out');
+
+    /**
+     * 이떄 문제점은 필터링이 이루어진후 애니메이션이 이루어지기에 좀 부자연 스러운 모습이 보인다
+     * 이를 방지하기 위해 먼저 애니메이션이 일어난 후 다시 보여질떄 필터링이 이루어져야하기에
+     * 아래의 코드를 setTimeout 함수 안으로 넣는다.
+     */
+    // 선택된 애들만 보이고 나머지는 안보이게
+    // projects.forEach(project => {
+    //     if(filter === '*' || filter === project.dataset.type) {
+    //         project.classList.remove('invisible');
+    //     }else {
+    //         project.classList.add('invisible');
+    //     }
+    // });
+
+    // 위의 foreach구문은 아래의 for문과 똑같다.
+    // for(let project of projects){
+
+    // }
+
+    // animation out이 버튼이 클릭된 상태면 계속 out 된 상태로 남아있기 때문에
+    // 일정 시간이 지난 후에는 이를 없애줘야댐
+    // setTimeout함수 사용, 300ms가 지난 후에 우리가 지정한 함수를 불러달라는 의미
+    setTimeout(() => {
+        projects.forEach(project => {
+            if(filter === '*' || filter === project.dataset.type) {
+                project.classList.remove('invisible');
+            }else {
+                project.classList.add('invisible');
+            }
+        });
+        projectContainer.classList.remove('anim-out');
+    }, 300);
+});
 
 
+
+
+ 
 // functions
 function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
