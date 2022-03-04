@@ -35,6 +35,10 @@ navbarMenu.addEventListener('click', (event) => {
     if(link == null){
         return;
     }
+
+    // 8번 메뉴바 숨기기
+    navbarMenu.classList.remove('open');
+
     // console.log(event.target.dataset.link);
 
     // const scrollTo = document.querySelector(link);
@@ -252,8 +256,18 @@ const catecoryBtn = document.querySelectorAll('.category__btn');
 //     // 6번의 같은 함수내에 있음
 // });
 
+// 8. navbar toggle(hambuger) button clicked
+// 화면이 작아졌을 때 생기는 navbar의 toggle버튼 클릭시 감춰져있던 navbar 메뉴들이
+// 보이도록 한다. 이후, 펼쳐진 상태에서 다시 클릭시 다시 감춰지도록 한다.
+const navbarToggleBtn = document.querySelector('.navbar__toggle-btn');
 
- 
+navbarToggleBtn.addEventListener('click', () => {
+    navbarMenu.classList.toggle('open');
+    // navbar 메뉴의 아이템 클릭시 스크롤링되면서 메뉴바가 다시 닫히게 한다.
+    // 2번 단락에서 추가함
+
+});
+
 // functions
 function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
