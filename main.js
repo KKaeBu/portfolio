@@ -157,6 +157,20 @@ workBtnContainer.addEventListener('click', (e) => {
         return;
     }
 
+    // 7. ellie ver
+    // 카테고리버튼의 active상태인 애를 가져옴
+    const active = document.querySelector('.category__btn.active');
+    // 이전에 이미 선택되어진 아이이기에 active를 remove해줌
+    active.classList.remove('active');
+    // 버튼을 클릭하여 선택된 아이는 active해줌
+    // e.target.classList.add('active');
+    // 위의 줄 처럼 하면 span태그로 감싸져있는 옆의 숫자 클릭시 문제가 발생함
+    // 그렇기에 span태그로 감싸진 숫자를 눌러도 버튼으로 활동할 수 있도록 해줘야함
+
+    // 클릭된 타겟의 nodeName이 button이면 e.target이고, button이 아니면 해당 타겟의 부모 노드를 준다
+    const target = e.target.nodeName === 'BUTTON' ? e.target : e.target.parentNode;
+    target.classList.add('active');
+
     // 버튼 클릭시 project container 자체가 사라지는 효과를 넣기 위해
     projectContainer.classList.add('anim-out');
 
@@ -194,7 +208,49 @@ workBtnContainer.addEventListener('click', (e) => {
     }, 300);
 });
 
+// 7. navbar active and project select
+// navbar 아이템 클릭시 active한 아이템에 border가 쳐지게 하고
+// work(project)란에서도 원하는 카테고리 선택시 배경색이 바뀌고 해당 카테고리에 고정되도록함
 
+
+// navbar 아이템은 그냥 마우스가 hover되면 border가 이동하는 방법으로 진행됬음
+// 단, 그때 기존 border를 
+// const navbarMenuItem = document.querySelectorAll('.navbar__menu__item');
+
+// navbarMenu.addEventListener('click', (e) => {
+//     // 각 메뉴 아이템들을 돌면서 클릭된 아이템과 같은 아이템은 active상태로 만들고
+//     // 아닌 아이템들에게선 active클래스를 삭제해준다.
+//     navbarMenuItem.forEach(item => {
+//         if(e.target === item) {
+//             item.classList.add('active');
+//         }else {
+//             item.classList.remove('active');
+//         }
+//     });
+// });
+
+const catecoryBtn = document.querySelectorAll('.category__btn');
+
+// 아래의 함수 내의 내용을 원래는 위의 같은 workBtnContainer 이벤트 리스너 함수 안에
+// 넣어도댐
+// workBtnContainer.addEventListener('click', (event) => {
+//     // navbar에서 했던것과 똑같이 클릭되는 요소 목록만 바꿔서 체크하면됨
+//     const filter = event.target.dataset.filter || event.target.parentNode.dataset.filter;
+//     console.log(filter);
+//     if(filter == null) {
+//         return;
+//     }
+//     // catecoryBtn.forEach(c => {
+//     //     if(event.target === c || event.target.parentNode === c) {
+//     //         c.classList.add('active');
+//     //     }else {
+//     //         c.classList.remove('active');
+//     //     }
+//     // });
+
+//     // ellie 버젼
+//     // 6번의 같은 함수내에 있음
+// });
 
 
  

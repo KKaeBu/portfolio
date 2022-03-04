@@ -152,14 +152,16 @@ p {
   margin: 0 4px;
   /* 아이템에 마우스 올렸을시 클릭 모양으로 바뀌게 함 */
   cursor: pointer;
+  border: 1px solid transparent;
   border-radius: var(--size-border-radius);
 }
 
-#navbar .navbar__menu .navbar__menu__item.active {
+/* #navbar .navbar__menu .navbar__menu__item.active {
   border: 1px solid var(--color-black);
-}
+} */
 
 #navbar .navbar__menu .navbar__menu__item:hover {
+  border-color: var(--color-black);
   background-color: var(--color-dark-pink);
 }
 
