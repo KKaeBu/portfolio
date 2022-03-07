@@ -215,6 +215,10 @@ p {
   color: var(--color-black);
 }
 
+#home .home__contact:hover {
+  background-color: var(--color-yellow);
+}
+
 /* Section common */
 /* 각 section에 공통적으로 들어가는 속성 정리 */
 .section {
@@ -376,6 +380,7 @@ p {
   border-radius: var(--size-border-radius);
   font-size: var(--font-regular);
   padding: 8px 48px;
+  position: relative;
 }
 
 /* 버튼이 active 상태이거나 hover 됬을때 배경색 변경 */
@@ -404,9 +409,9 @@ p {
   display: inline-block;
   line-height: 24px;
 
-  position: relative;
+  position: absolute;
   top: -20px;
-  left: 4px;
+  right: 16px;
   /* 평소에는 안보이게 하기위해 opacity값을 0으로함 */
   opacity: 0;
   transition: all var(--animation-duration) ease-in;
@@ -594,19 +599,33 @@ p {
 /* Media query */
 /* For below 768px screen width */
 @media screen and (max-width: 768px) {
+  /* 미디어 쿼리 안에서 root의 변수를 재 설정 가능 */
+  :root {
+    /* Font Size */
+    --font-large: 30px;
+    --font-medium: 18px;
+    --font-regular: 16px;
+    --font-small: 14px;
+    --font-micro: 12px;
+  }
+
   /* 화면이 작아졌을때 toglle을 보여지게함 */
   .navbar__toggle-btn {
     display: block;
+    font-size: var(--font-medium);
+    top: 28px;
+    right: 16px;
   }
 
   #navbar {
     flex-direction: column;
     align-items: flex-start;
     background-color: var(--color-pink);
+    padding: 0;
   }
 
   #navbar.navbar--dark {
-    padding: 16px;
+    padding: 0px;
   }
 
   #navbar .navbar__menu {
@@ -622,16 +641,30 @@ p {
     display: block;
   }
 
-  .about__majors {
+  /* 화면이 작을 경우엔 section의 padding이 너무 크다
+  그래서 줄여줌 (모바일의 경우 16px정도가 보통임) */
+  .section {
+    padding: 16px;
+    padding-top: 60px;
+  }
+
+  #about .about__majors {
     flex-direction: column;
+    margin-top: 30px;
+    margin-bottom: 0px;
   }
 
   .major {
-    margin-bottom: 38px;
+    margin-bottom: 30px;
   }
 
   .skillset {
     flex-direction: column;
+  }
+
+  .category__btn {
+    margin: 4px 0;
+    width: 100%;
   }
 
   .project {
@@ -639,8 +672,42 @@ p {
     flex-grow: 1;
   }
 
+  .testimonials {
+    margin: 16px;
+  }
+
+  .testimonial {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 26px;
+    margin-bottom: 0;
+  }
+
   .testimonial__avatar {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .testimonial__avatar:nth-child(n) {
+    margin: 0px;
+    margin-bottom: 8px;
+  }
+
+  /* 아바타가 먼저오고 말풍선이 나중에 오게 하기 위해
+  우선순위를 변경해주면 된다.(order의 default값은 항상 0 이기에)
+  speach-bubble의 order값을 1로 해주면 항상 avatar보다 뒤에 나오게됨 
+  (oreder값이 클수록 나주엥 나옴)*/
+  .testimonial__speech-bubble {
+    order: 1;
+  }
+
+  /* 화면 작을 땐 up버튼 크기 조절 */
+  .arrowUpBtn {
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+    line-height: 45px;
+    right: 16px;
+    bottom: 16px;
   }
 }
