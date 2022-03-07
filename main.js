@@ -39,6 +39,12 @@ navbarMenu.addEventListener('click', (event) => {
     // 8번 메뉴바 숨기기
     navbarMenu.classList.remove('open');
 
+    
+    // 9-1. navbar__menu__item 클릭시 클릭한 item에 border 고정시키기
+    const navbarItem = document.querySelector('.navbar__menu__item.active');
+    navbarItem.classList.remove('active');
+    target.classList.add('active');
+
     // console.log(event.target.dataset.link);
 
     // const scrollTo = document.querySelector(link);
@@ -62,6 +68,20 @@ const home = document.querySelector('.home__container');
 // 높이를 가져오기 위한 함수사용
 const homeHeight = home.getBoundingClientRect().height;
 
+// 9-2
+const homeid = document.getElementById('home');
+const about = document.getElementById('about');
+const skills = document.getElementById('skills');
+const work = document.getElementById('work');
+const testimonials = document.getElementById('testimonials');
+const contact = document.getElementById('contact');
+
+const homeidHeight = 0;
+const aboutHeight = homeid.getBoundingClientRect().height + homeidHeight;
+const skillsHeight = about.getBoundingClientRect().height + aboutHeight;
+const workHeight = skills.getBoundingClientRect().height + skillsHeight;
+const testimonialsHeight = work.getBoundingClientRect().height + workHeight;
+
 document.addEventListener('scroll', () => {
     // console.log(window.scrollY)
     // console.log(`homeHeight: ${homeHeight}`);
@@ -75,6 +95,22 @@ document.addEventListener('scroll', () => {
     // 이 때 home 전체가 투명해지는것이 아니라 home 안에 컨텐츠들만 투명해지게 하기 위해
     // html코드의 home 안에 있는 코드들을 home__container라는 div로 한번 묶어줘서
     // 해당 컨테이너가 투명해지도록 한다.
+
+    // 9-2. 스크롤시 스크롤된 section에 따라서 navbar 아이템에 border 나타나게 하기
+
+    if(window.scrollY <= homeHeight) {
+        console.log('home');
+    }else if(window.scrollY <= aboutHeight){
+        console.log('about');
+    }else if(window.scrollY <= skillsHeight){
+        console.log('skills');
+    }else if(window.scrollY <= workHeight){
+        console.log('work');
+    }else if(window.scrollY <= testimonialsHeight){
+        console.log('test');
+    }else {
+        console.log('contact');
+    }
 });
 
 // 5. Arrow up button
@@ -267,6 +303,10 @@ navbarToggleBtn.addEventListener('click', () => {
     // 2번 단락에서 추가함
 
 });
+
+// extra 1. 스크롤 될때마다 단락 영역에 따라 navbar menu item에 그거에 맞게
+// border line 쳐주기
+
 
 // functions
 function scrollIntoView(selector) {

@@ -156,9 +156,9 @@ p {
   border-radius: var(--size-border-radius);
 }
 
-/* #navbar .navbar__menu .navbar__menu__item.active {
+#navbar .navbar__menu .navbar__menu__item.active {
   border: 1px solid var(--color-black);
-} */
+}
 
 #navbar .navbar__menu .navbar__menu__item:hover {
   border-color: var(--color-black);
@@ -223,6 +223,7 @@ p {
 /* 각 section에 공통적으로 들어가는 속성 정리 */
 .section {
   padding: 50px;
+  padding-top: 60px;
   text-align: center;
   margin: auto;
 }
