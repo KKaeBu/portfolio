@@ -41,15 +41,18 @@ navbarMenu.addEventListener('click', (event) => {
 
     
     // 9-1. navbar__menu__item 클릭시 클릭한 item에 border 고정시키기
-    const navbarItem = document.querySelector('.navbar__menu__item.active');
-    navbarItem.classList.remove('active');
-    target.classList.add('active');
+    // const navbarItem = document.querySelector('.navbar__menu__item.active');
+    // navbarItem.classList.remove('active');
+    // target.classList.add('active');
 
     // console.log(event.target.dataset.link);
 
     // const scrollTo = document.querySelector(link);
     // scrollTo.scrollIntoView({ behavior: 'smooth' });
     scrollIntoView(link);
+
+    // 9-1 ellie ver
+    // selectNavItem(target);
 });
 
 // 3. Scrolling when "contact me" button clicked
@@ -68,20 +71,6 @@ const home = document.querySelector('.home__container');
 // 높이를 가져오기 위한 함수사용
 const homeHeight = home.getBoundingClientRect().height;
 
-// 9-2
-const homeid = document.getElementById('home');
-const about = document.getElementById('about');
-const skills = document.getElementById('skills');
-const work = document.getElementById('work');
-const testimonials = document.getElementById('testimonials');
-const contact = document.getElementById('contact');
-
-const homeidHeight = 0;
-const aboutHeight = homeid.getBoundingClientRect().height + homeidHeight;
-const skillsHeight = about.getBoundingClientRect().height + aboutHeight;
-const workHeight = skills.getBoundingClientRect().height + skillsHeight;
-const testimonialsHeight = work.getBoundingClientRect().height + workHeight;
-
 document.addEventListener('scroll', () => {
     // console.log(window.scrollY)
     // console.log(`homeHeight: ${homeHeight}`);
@@ -95,22 +84,7 @@ document.addEventListener('scroll', () => {
     // 이 때 home 전체가 투명해지는것이 아니라 home 안에 컨텐츠들만 투명해지게 하기 위해
     // html코드의 home 안에 있는 코드들을 home__container라는 div로 한번 묶어줘서
     // 해당 컨테이너가 투명해지도록 한다.
-
-    // 9-2. 스크롤시 스크롤된 section에 따라서 navbar 아이템에 border 나타나게 하기
-
-    if(window.scrollY <= homeHeight) {
-        console.log('home');
-    }else if(window.scrollY <= aboutHeight){
-        console.log('about');
-    }else if(window.scrollY <= skillsHeight){
-        console.log('skills');
-    }else if(window.scrollY <= workHeight){
-        console.log('work');
-    }else if(window.scrollY <= testimonialsHeight){
-        console.log('test');
-    }else {
-        console.log('contact');
-    }
+    
 });
 
 // 5. Arrow up button
@@ -304,12 +278,105 @@ navbarToggleBtn.addEventListener('click', () => {
 
 });
 
-// extra 1. 스크롤 될때마다 단락 영역에 따라 navbar menu item에 그거에 맞게
-// border line 쳐주기
+// 9-1. navbar item 클릭시 해당 영역으로 스크롤 되면서 클릭한 item에 border 유지하기
+    //2번 scrolling 메서드 내에서 함께 구현
 
+// 9-2. scrolling 될때 특정 section 영역에 들어오면 해당 section에 맞는
+// navbar item의 border 활성화 시키기
+// intersection observe를 활용하여 구현
+// const sections = document.querySelectorAll('.section');
+
+// const options = {
+//     root: null,
+//     rootMargin: '0px',
+//     threshold: 0.6,
+// };
+// const navbarItems = document.querySelectorAll('.navbar__menu__item');
+// navbarItems.forEach(item => {
+//     console.log(item.dataset.link);
+// })
+
+// const observer = new IntersectionObserver((entries, observe) => {
+//     entries.forEach(entry => {
+//         if(entry.isIntersecting) {
+//             const navbarItemActive = document.querySelector('.navbar__menu__item.active');
+//             navbarItemActive.classList.remove('active');
+//             navbarItems.forEach(item => {
+//                 if(item.dataset.link == ('#'+entry.target.id)){
+//                     item.classList.add('active');
+//                 }
+//             });
+//         }else {
+
+//         }
+//     });
+// }, options);
+
+// sections.forEach(section => observer.observe(section));
+
+// 9-2 ellile ver
+// 1. 모든 섹션 요소들과 메뉴 아이템들을 가지고 온다.
+// 2. IntersectionObserver를 이용해서 모든 섹션들을 관찰한다.
+// 3. 보여지는 섹션에 해당하는 메뉴 아이템을 활성화 시킨다.
+
+const sectionIds = [
+    '#home',
+    '#about',
+    '#skills',
+    '#work',
+    '#testimonials',
+    '#contact',
+];
+// 각각의 아이디르 섹션 dom 요소로 변환시키기 위해서 map API를 활용한다.
+const sects = sectionIds.map(id => document.querySelector(id));
+
+const navItems = sectionIds.map(id => document.querySelector(`[data-link="${id}"]`));
+
+let selectedNavIndex = 0;
+let selectedNavItem = navItems[0];
+function selectNavItem(selected) {
+    selectedNavItem.classList.remove('active');
+    selectedNavItem = selected
+    selectedNavItem.classList.add('active'); 
+}
+
+const observeOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3,
+};
+
+const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+        if(!entry.isIntersecting && entry.intersectionRatio > 0) {
+            console.log(entry.target.id);
+            const index = sectionIds.indexOf(`#${entry.target.id}`);
+            // 스크롤링이 아래로 되어서 페이지가 올라옴 (뒤에 따라오는 index 선택)
+            if(entry.boundingClientRect.y < 0) {
+                selectedNavIndex = index + 1;
+            }else{
+                selectedNavIndex = index - 1;
+            }
+        }
+    });
+};
+const observer = new IntersectionObserver(observerCallback, observeOptions);
+sects.forEach(s => observer.observe(s));
+
+// 사용자가 스스로 스크롤하는 이벤트는 wheel 이벤트가 발생한다.
+window.addEventListener('wheel', () => {
+    if(window.scrollY === 0){ //스크롤이 제일 위에 있을 때
+        selectedNavIndex = 0;
+    }else if( Math.round(window.scrollY + window.innerHeight) >= document.body.clientHeight){
+        // 스크롤이 제일 아래에 있을 때
+        selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavIndex]);
+});
 
 // functions
 function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({ behavior: 'smooth' });
+    selectNavItem(navItems[sectionIds.indexOf(selector)]);
 }
